@@ -1,0 +1,71 @@
+﻿@using Project_EAD.Models;
+@{
+    Layout = "~/Views/Shared/Others.cshtml";
+    User user = (User)Session["user"];
+    ViewBag.x = user.ImagePath; 
+    
+}
+
+@model List<Friend>
+<div class="content">
+    <div class="module">
+        <div class="module-head">
+            <h2>Friends</h2>
+        </div>
+
+
+        <div class="module-body">
+
+
+            <div class="row-fluid">
+                              @foreach(Friend u in Model)
+                              { 
+                                 
+                                    
+                               
+                                    
+                                        <div style="margin-left:10%" class="span9">
+                                        
+                                            <div class="media user">
+                                                <!--a class="media-avatar pull-left" href="/Client/ViewFriends">
+                                                   <img src="@u.User.ImagePath">
+                                                </!--a-->
+                                                  <a class="media-avatar pull-left" href="/Friend/FriendsProfile?friendName=@u.User.UserName" >
+                                                   <img src="@u.User.ImagePath">
+                                                    </a>
+                                                <div class="media-body">
+                                                    <h3 class="media-title">
+                                                        @u.User.Name</h3>
+                                                    <p>
+                                                        <small class="muted">Pakistan</small></p>
+                                              
+                                                    
+                                                    <div class="media-option btn-group shaded-icon">
+                                           
+                                                 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         
+                                        </div>
+                                       
+  
+                              }
+                             </div>
+                                     <br />
+                                <div class="pagination pagination-centered">
+                                    <ul>
+                                        <li><a href="#"><i class="icon-double-angle-left"></i></a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#"><i class="icon-double-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+                                  
+
+                  
+                

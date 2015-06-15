@@ -1,0 +1,101 @@
+﻿ 
+    @using Project_EAD.Models;
+@{
+   
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+    User u = (User)Session["user"];
+    ViewBag.x = u.ImagePath; 
+}
+
+
+<div class="content">
+
+						<div class="module">
+							<div class="module-head">
+								<h3>Add User</h3>
+							</div>
+							<div class="module-body">
+
+									<div class="alert">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Terms And Conditons </strong> Use your Account
+									</div>
+									<div class="alert alert-error">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Post </strong> Post only valid thing
+									</div>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Enjoy </strong> Now you are Enjoying me :) 
+									</div>
+
+									<br />
+
+									<form class="form-horizontal row-fluid" action="/User/Add" method="post" enctype="multipart/form-data">
+										<div class="control-group">
+											<label class="control-label" for="basicinput">User Name</label>
+											<div class="controls">
+												<input type="text" name="userName" id="basicinput4" placeholder="User Name" class="span8">
+												
+											</div>
+										</div>
+
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Name</label>
+											<div class="controls">
+												<input type="text" name="Name" id="basicinput1" placeholder="Name" class="span8">
+												
+											</div>
+										</div>
+
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Password</label>
+											<div class="controls">
+												<input type="password" name="Password" id="basicinput2" placeholder="Password" class="span8">
+												
+											</div>
+										</div>
+                                         <div class="control-group">
+											<label class="control-label" for="basicinput">Password</label>
+											<div class="controls">
+												<input type="password" name="cPassword" id="basicinput3" placeholder="Confirm Password" class="span8">
+												
+											</div>
+										</div>
+									
+
+                                         <div class="control-group">
+											<label class="control-label" for="basicinput">Chose Profile Picture</label>
+											<div class="controls">
+												  <input type="file" name="image" /> 
+												
+											</div>
+										</div>
+
+									
+                                            
+                                        <div class="control-group">
+											<label style="font-size:x-large;" class="control-label" for="basicinput">Role</label>
+											<div class="controls">
+												<h5> Client:</h5>  <input type="radio" value="client" name="role" /> 
+                                                  <h5> Admin:</h5>   <input type="radio" value="admin" name="role" /> 
+												
+											</div>
+										</div>
+
+										<div class="control-group">
+											<div class="controls">
+												<button type="submit" class="btn">Add User</button>
+											</div>
+										</div>
+									</form>
+							</div>
+						</div>
+
+						
+						
+				
+    
+    	</div><!--/.content-->
+

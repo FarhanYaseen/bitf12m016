@@ -1,0 +1,161 @@
+﻿@using Project_EAD.Models;
+@{   
+     User u = (User)Session["user"];
+    ViewBag.x = u.ImagePath; 
+
+    if(u.Role.Equals("client"))
+    {
+         Layout = "~/Views/Shared/Others.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/AdminLayout.cshtml";
+    }
+   
+    
+}
+    
+@using Project_EAD.Models;
+@using  System.Collections.Generic;
+
+@model List<Message>
+    <div class="content">
+                         
+           <div class="module message">
+                                <div class="module-head">
+                                    <h3>
+                                        Message</h3>
+                                </div>
+                                <div class="module-option clearfix">
+                                    <div class="pull-left">
+                                        <div class="btn-group">
+                                            <button class="btn">
+                                                Inbox</button>
+                                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Message/Message">Inbox</a></li>
+                                     
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+              
+                                
+                             <div class="stream-composer media" style="margin-left:10px;">
+									<a href="#" class="media-avatar medium pull-left">
+										<img src="@u.ImagePath">
+									</a>
+									<div class="media-body">
+                                        <form name="myForm" method="post" action="/Message/SendMessage">
+                                           <h5 class="stream-author">Compose </h5>
+										<div class="row-fluid">
+											<textarea name="message" class="span9" style="height: 70px; resize: none;"></textarea>
+										</div>
+										<div class="media-option btn-group shaded-icon">
+											
+										               
+                                           <h5 class="stream-author">Message To </h5> 
+                                            @Html.TextBox("MessageTo", null, new { style="width:70%;height:4%;"})
+
+                                            <button type="submit" class="btn btn-small icon-share-alt" style="height:4%; "> Send </button>
+                                            </div>
+                                              </form>
+												 <!--a href="/Message/SendMessage" class="btn btn-primary">Compose</a-->
+                                            @if(TempData["error"]!=null)
+                                            {
+                                                    <div class="alert alert-danger span6" role="alert">
+                                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                  <span class="sr-only">Error:</span>
+                                                  @TempData["error"]
+                                                        </div>
+											}
+											
+										
+                                          
+									</div>
+								</div>
+                                <div class="module-body table">
+                                    <table class="table table-message">
+                                        <tbody>
+                                            <tr class="heading">
+                                                <td class="cell-check">
+                                                    <input type="checkbox" class="inbox-checkbox">
+                                                </td>
+                                                <td class="cell-icon">
+                                                </td>
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                    Message From
+                                                </td>
+                                                <td class="cell-title">
+                                                    Content
+                                                </td>
+                                              
+                                                <td class="cell-time align-right">
+                                                    Date
+                                                </td>
+                                            </tr>
+
+
+                                            @for (int i = Model.Count-1; i >= 0; i--)
+                                            { 
+                                             <tr class="unread">
+                                                <td class="cell-check">
+                                                    <input type="checkbox" class="inbox-checkbox">
+                                                </td>
+                                                <td class="cell-icon">
+                                                    <i class="icon-star"></i>
+                                                </td>
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                    @Model[i].MessageFrom
+                                                </td>
+                                                <td class="cell-title">
+                                                    @Model[i].MessageText
+                                                </td>
+                                             
+                                                <td class="cell-time align-right">
+                                                     @String.Format("{0:d-M-yy}", Model[i].MessageDate)
+                                                    
+                                                </td>
+                                            </tr>
+                                                
+                                            }
+                                            @*{
+                                                //    User user = (User)Session["user"];
+                                                //   var admin=new SocialPediaDBEntities4();
+                                                //  var msgs= admin.Messages.Where(x=>x.MessageTo.Equals(user.UserName)).Select(x=>x);
+                                                foreach (var i in Model)
+                                                { 
+                                                <tr class="unread">
+                                                <td class="cell-check">
+                                                    <input type="checkbox" class="inbox-checkbox">
+                                                </td>
+                                                <td class="cell-icon">
+                                                    <i class="icon-star"></i>
+                                                </td>
+                                                <td class="cell-author hidden-phone hidden-tablet">
+                                                    @i.MessageFrom
+                                                </td>
+                                                <td class="cell-title">
+                                                    @i.MessageText
+                                                </td>
+                                             
+                                                <td class="cell-time align-right">
+                                                     @String.Format("{0:d-M-yy}", i.MessageDate)
+                                                    
+                                                </td>
+                                            </tr>  
+                                                }
+                                                
+                                              }*@
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="module-foot">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.content-->

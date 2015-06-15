@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/Others.cshtml";
+    User user = (User)Session["user"];
+    ViewBag.x = user.ImagePath; 
+    
+}
+@using Project_EAD.Models;
+@model List<User>
+
+ <div class="content">
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    People You May Know</h3>
+                            </div>
+                            
+                            <div class="module-body">
+                         
+                                 <div class="row-fluid">
+                              @foreach(User u in Model)
+                              { 
+                                 // int count= u.Friends.Where(x=>x.FriendName.Equals(u.UserName)).Select(x=>x).Count();
+                                  int flag= user.FriendRequests.Where(x=>x.RequestTo.Equals(u.UserName) || x.RequestFrom.Equals(user.UserName)).Select(x=>x).Count();
+                                  int count1=user.Friends.Where(x=>x.FriendName.Equals(u.UserName)).Select(x=>x).Count();
+                                  if((!u.Role.Equals("admin")) && (count1==0 ) && (flag==0))
+                                  {
+                                      
+                               
+                                    
+                                        <div style="margin-left:10%" class="span9">
+                                     
+                                            <div class="media user">
+                                                <a class="media-avatar pull-left" href="/Client/AddFriends">
+                                                   <img src="@u.ImagePath">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h3 class="media-title">
+                                                        @u.Name</h3>
+                                                    <p>
+                                                        <small class="muted">Pakistan</small></p>
+                                              
+                                                    
+                                                    <div class="media-option btn-group shaded-icon">
+                                                         @Html.ActionLink(" ","SendFriendRequest","Friend",u,new { @class="btn btn-small icon-share-alt"   })
+                                                      
+                                                            @Html.ActionLink(" ","Message","Message",null,new { @class="btn btn-small icon-envelope"})
+                                                         
+                                                @*if(user.FriendRequests.Where(x=>x.RequestTo.Equals(u.UserName) || x.RequestFrom.Equals(user.UserName)).Select(x=>x).Count()==0)
+                                                          
+                                                        {
+                                                                         
+                                                            
+                                                          }*@
+                                                        
+                                                 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         
+                                        </div>
+                                     
+                                 
+                                }
+                                 
+                                 
+                                 
+                              }
+                             </div>
+                                     <br />
+                                <div class="pagination pagination-centered">
+                                    <ul>
+                                        <li><a href="/Client/AddFriends"><i class="icon-double-angle-left"></i></a></li>
+                                        <li><a href="/Client/AddFriends">1</a></li>
+                                        <li><a href="/Client/AddFriends">2</a></li>
+                                        <li><a href="/Client/AddFriends">3</a></li>
+                                        <li><a href="/Client/AddFriends"><i class="icon-double-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                                  
+                    </div>
+                  
+                

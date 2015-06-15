@@ -1,0 +1,94 @@
+﻿@using Project_EAD.Models;
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    User u = (User)Session["user"];
+    ViewBag.x = u.ImagePath; 
+
+}
+@model User
+
+
+
+<div class="content">
+
+						<div class="module">
+							<div class="module-head">
+								<h3>Update User</h3>
+							</div>
+							<div class="module-body">
+
+									<div class="alert">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Warning!</strong> Something fishy here!
+									</div>
+									<div class="alert alert-error">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Oh snap!</strong> Whats wrong with you? 
+									</div>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Well done!</strong> Now you are listening me :) 
+									</div>
+
+									<br />
+
+									<form class="form-horizontal row-fluid" action="/User/Update" method="post" enctype="multipart/form-data">
+										<div class="control-group">
+											<label class="control-label" for="basicinput">Chnage Name</label>
+											<div class="controls">
+												<input type="text" name="Name" id="basicinput1" placeholder="Type something here..." class="span8">
+												<input type="hidden" name="userName" value="@Model.UserName" />
+											</div>
+										</div>
+                                        <div class="control-group">
+											<label class="control-label" for="basicinput">Chnage Password</label>
+											<div class="controls">
+												<input type="text" name="Password" id="basicinput2" placeholder="Type something here..." class="span8">
+												
+											</div>
+										</div>
+                                         <div class="control-group">
+											<label class="control-label" for="basicinput">Confirm Password</label>
+											<div class="controls">
+												<input type="text" name="cPassword" id="basicinput3" placeholder="Type something here..." class="span8">
+												
+											</div>
+										</div>
+									
+
+                                         <div class="control-group">
+											<label class="control-label" for="basicinput">Chnage Profile Picture</label>
+											<div class="controls">
+												  <input type="file" name="image" /> 
+												
+											</div>
+										</div>
+
+									
+
+										<div class="control-group">
+											<div class="controls">
+												<button type="submit" class="btn">Saves Changes</button>
+											</div>
+										</div>
+									</form>
+							</div>
+						</div>
+
+						
+						
+				
+    
+    	</div><!--/.content-->
+  @if(ViewBag.Error!=null)
+        {
+           if((!ViewBag.error.Equals("")))
+                {
+                   <div class="alert alert-danger" role="alert">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                            @ViewBag.Error
+                        </div>
+                                
+                }
+            }

@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/Others.cshtml";
+    User user = (User)Session["user"];
+    ViewBag.x = user.ImagePath; 
+    
+}
+@using Project_EAD.Models;
+@model List<FriendRequest>
+
+<div class="content">
+
+    <div class="module message">
+        <div class="module-head">
+            <h3>Friends Request</h3>
+        </div>
+
+        <div class="module-body table">
+
+            <table class="table table-message">
+                <tbody>
+                    <tr class="heading">
+                        <td class="cell-icon"></td>
+                        <td class="cell-title">Request From</td>
+                        <td class="cell-title">Status</td>
+                        <td class="cell-time ">Accept</td>
+                        <td class="cell-time align-right">Date</td>
+                    </tr>
+                    @foreach(var i in Model)
+                    {
+                    <tr class="task">
+                        <td class="cell-icon"><i class="icon-checker high"></i></td>
+                        <td class="cell-title">
+                            <div>@i.RequestFrom</div>
+                        </td>
+                        <td class="cell-title">
+                            <div>@i.status</div>
+                        </td>
+                        @if (i.status.Equals("y"))
+                        { 
+                         <td class="cell-title"><b class="due">Accepted</b></td>
+                        }
+                        else{
+                        
+                            <td class="cell-status"><b class="due">@Html.ActionLink("Accept", "Accept", "Friend",i, new { @class = "due menu-icon" }) </b></td>
+                        }
+                        <td class="cell-time align-right">@i.RequestDate</td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>

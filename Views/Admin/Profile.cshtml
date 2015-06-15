@@ -1,0 +1,91 @@
+﻿@using Project_EAD.Models;
+@{
+   
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+    User user = (User)Session["user"];
+    ViewBag.x = user.ImagePath; 
+    
+    }
+
+<div class="content">
+    <div class="module">
+
+        <div class="module-body">
+            <div class="profile-head media">
+                <a href="#" class="media-avatar pull-left">
+                    <img src="@user.ImagePath">
+                </a>
+                <div class="media-body">
+                    <h4>@user.Name <small>Online</small>
+                    </h4>
+                    <p class="profile-brief">
+                        Social Pedia A Site jusT enough
+                    </p>
+
+                </div>
+            </div>
+            <ul class="profile-tab nav nav-tabs">
+                <li class="active"><a href="#activity" data-toggle="tab">Feed</a></li>
+                <li><a href="#friends" data-toggle="tab">Friends</a></li>
+            </ul>
+
+
+
+
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Warning!</strong> Something fishy here!
+            </div>
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Oh snap!</strong> Whats wrong with you? 
+            </div>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Well done!</strong> Now you are listening me :) 
+            </div>
+
+            <br />
+
+            <form class="form-horizontal row-fluid" action="/User/UpdateUser" method="post" enctype="multipart/form-data">
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">Name</label>
+                    <div class="controls">
+                        <input type="text"  readonly="readonly" value="@user.Name"  name="Name" id="basicinput1" class="span8">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="basicinput">Password</label>
+                    <div class="controls">
+                        <input type="text"  readonly="readonly" value="@user.Password" name="Password" id="basicinput2"  class="span8">
+                    </div>
+                </div>
+                <br />
+                <br />
+
+
+
+            </form>
+            <div class="module-body">
+
+									<div class="alert">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Warning!</strong> Something fishy here!
+									</div>
+									<div class="alert alert-error">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Oh snap!</strong> Whats wrong with you? 
+									</div>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+										<strong>Well done!</strong> Now you are listening me :) 
+									</div>
+
+									<br />
+
+        </div>
+
+    </div>
+</div>
+

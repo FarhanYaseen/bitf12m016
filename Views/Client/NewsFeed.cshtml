@@ -1,0 +1,446 @@
+﻿@{
+    Layout = "~/Views/Shared/ClientLayout.cshtml";
+    User u = (User)Session["user"];
+    ViewBag.x = u.ImagePath; 
+}
+
+@using Project_EAD.Models;
+@using System.Collections.Generic;
+@model List<Post>
+<script>
+    function anchor_test(val) {
+        $.getJSON("/friend/like?postid=" + val, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+    }
+    function pass_comment(val1) {
+        com = $('#Comment').val();
+
+        $.getJSON("/Friend/Comment?post=" + val1 + "&Comment=" + com, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+
+        });
+
+
+    }
+    function pass_comment1(val) {
+
+        com = $('#Comment1').val();
+        $.getJSON("/friend/Comment?post=" + val + "&Comment=" + com, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+
+    }
+    function pass_comment2(val) {
+
+        com = $('#Comment2').val();
+        $.getJSON("/friend/Comment?post=" + val + "&Comment=" + com, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+
+    }
+
+    function myFunc() {
+        var userName = $('#b1').val();
+
+        $.getJSON("/friend/like?postid=" + userName, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+    }
+    function myFunc1() {
+        var userName = $('#b2').val();
+
+        $.getJSON("/friend/like?postid=" + userName, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+
+
+    }
+    function myFunc2() {
+        var userName = $('#b3').val();
+
+        $.getJSON("/friend/like?postid=" + userName, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+
+    }
+    function Delete(val) {
+
+        $.getJSON("/Post/Delete?post=" + val, function (data) {
+            $('body').unload();
+            $("body").load("/Client/NewsFeed");
+        });
+
+
+    }
+
+
+</script>
+<!DOCTYPE html>
+
+<div id="main" class="content">
+    <div class="module">
+        <div class="module-head">
+            <h3>News Feed</h3>
+        </div>
+        <div class="module-body">
+            <div class="profile-tab-content tab-content">
+                <div class="tab-pane fade active in" id="activity">
+                    <div class="stream-list">
+                        <div style="overflow-wrap: break-word; margin-left: 10%">
+                            <div class="stream-attachment photo">
+                                <div class="responsive-photo">
+                                    <form action="/Post/AddPost" method="post" enctype="multipart/form-data">
+                                        <textarea name="textPost" id="mypost" style="text-align: start; background-color: white; width: 100%; height: 100px; resize: none;"></textarea><br />
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="span10">
+
+                                                <input type="text" name="video" value="" placeholder="Write Any Link" />
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="span4">
+
+                                                <input type="file" name="image">
+                                             
+
+                                                <input style="ruby-align: right; width: 100px ; background: url('@Url.Content("~/Content/Images/imageUpload.png")'" class="btn btn-default" type="submit" value="Post"/>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @using Project_EAD.Models;
+
+                        @for(int i=Model.Count-1;i>=0;i--)
+                        {
+                            if (@Model[i].PostType.Equals("image"))
+                            {
+                            <div class="media stream">
+                                <a  class="media-avatar medium pull-left fancybox" rel="group" href="@Model[i].User.ImagePath">
+
+                                    <img src="@Model[i].User.ImagePath">
+                                </a>
+
+                                <div class="media-body">
+                                    <div class="stream-headline">
+                                        <h5 class="stream-author">@Model[i].User.Name <small>@Model[i].PostDate </small>
+                                        </h5>
+                                        <div class="stream-text">
+                                            @Model[i].PostText
+                                        </div>
+                                        <div class="stream-attachment photo">
+                                            <div class="responsive-photo">
+                                              
+                                                <a class="fancybox" href="@Model[i].PostPath" >
+                                                    <img src="@Model[i].PostPath" alt="" /></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+
+                                            <label>@Model[i].Likes.Where(x => x.Post.Id == Model[i].Id).Select(x => x).Count() Likes</label>
+                                            <A HREF="javascript:anchor_test(@Model[i].Id)" class="btn btn-small" id="b1"><i class=" icon-thumbs-up shaded">Like</i></a>
+                                             @if(Model[i].userName.Equals(u.UserName))
+                                                {
+                                                <a href="javascript:Delete('@Model[i].Id')" class="btn btn-small">
+													<i class="icon-retweet shaded"></i>
+													Delete
+												</a>
+                                                }
+                                
+
+                                        </div>
+                               
+                                    </div>
+
+
+
+
+
+
+                                    <div class="stream-respond" id="newone">
+                                        @foreach (var k in Model[i].Comments)
+                                        {
+       
+                                            <div class="media stream">
+                                                <a href="#" class="media-avatar small pull-left">
+                                                    <img src="@k.User.ImagePath">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="stream-headline">
+                                                        <h5 class="stream-author">
+
+                                                            <b>@k.CommentFrom.</b><small>@k.CommentDate </small>
+                                                        </h5>
+                                                        <div class="stream-text">
+                                                            @k.Content
+                                                        </div>
+                                                    </div>
+                                               
+                                                </div>
+                                            </div>
+                                        }
+                           
+
+
+                                    </div>
+
+
+
+                                    <div>
+                                        <div class="responsive-photo" style="margin-top: 10px;">
+
+                                            <form method="post" onsubmit="/Friend/Comment" action="/Friend/Comment">
+
+                                                <input type="text" name="Comment" value="" placeholder="Write Comment Here" class="span6" style="height: 30px;" />
+
+                                                @Html.Hidden("post", @Model[i].Id)
+
+                                            </form>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            }
+
+                            else if (Model[i].PostType.Equals("video"))
+                            {
+                            <!--/.media .stream-->
+                            <div class="media stream">
+                                <a href="#" class="media-avatar medium pull-left">
+                                    <img src="@Model[i].User.ImagePath">
+                                </a>
+                                <div class="media-body">
+                                    <div class="stream-headline">
+                                        <h5 class="stream-author">@Model[i].User.Name <small>
+                                            @Model[i].PostDate
+                                        </small>
+                                        </h5>
+                                        <div class="stream-text">
+                                            @Model[i].PostText
+                                        </div>
+                                        <div class="stream-attachment video">
+                                            <div class="responsive-video">
+                                                <iframe src="@Model[i].PostPath" width="560" height="315" frameborder="0"
+                                                        webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+
+                                            <label>@Model[i].Likes.Where(x => x.Post.Id == Model[i].Id).Select(x => x).Count() Likes</label>
+
+                                            <A HREF="javascript:anchor_test(@Model[i].Id)" class="btn btn-small" id="b2"><i class=" icon-thumbs-up shaded">Like</i></a>
+                                            @if(Model[i].userName.Equals(u.UserName))
+                                                {
+                                                <a href="javascript:Delete('@Model[i].Id')" class="btn btn-small">
+													<i class="icon-retweet shaded"></i>
+													Delete
+												</a>
+                                                }
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="stream-respond">
+
+                                        @foreach (var k in Model[i].Comments)
+                                        {
+       
+                                            <div class="media stream">
+                                                <a href="#" class="media-avatar small pull-left">
+                                                    <img src="@k.User.ImagePath">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="stream-headline">
+                                                        <h5 class="stream-author">
+
+                                                            <b>@k.CommentFrom.</b><small>@k.CommentDate </small>
+                                                        </h5>
+                                                        <div class="stream-text">
+                                                            @k.Content
+                                                        </div>
+                                                    </div>
+                                                    <!--/.stream-headline-->
+                                                </div>
+                                            </div>
+                                            <!--/.media .stream-->
+                                        }
+
+                                    </div>
+                                    <div>
+                                        <div class="responsive-photo" style="margin-top: 10px;">
+
+                                            <form method="post" onsubmit="/Friend/Comment" action="/Friend/Comment">
+
+                                                <input type="text" name="Comment" value="" placeholder="Write Comment Here" class="span6" style="height: 30px;" />
+
+                                                @Html.Hidden("post", @Model[i].Id)
+
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            }
+                            else
+                            {
+                                
+                                
+                            <div class="media stream">
+                                <a href="#" class="media-avatar medium pull-left">
+
+                                    <img src="@Model[i].User.ImagePath">
+                                </a>
+                                <div class="media-body">
+                                    <div class="stream-headline">
+                                        <h5 class="stream-author">@Model[i].User.Name <small>@Model[i].PostDate </small>
+                                        </h5>
+
+                                        <div class="stream-attachment photo">
+                                            <div class="responsive-photo">
+                                                @Model[i].PostText
+                                            </div>
+                                        </div>
+
+
+                                        <div class="media-body">
+                                            <div class="stream-headline">
+
+                                                <label>@Model[i].Likes.Where(x => x.Post.Id == Model[i].Id).Select(x => x).Count() Likes</label>
+
+                                                <A HREF="javascript:anchor_test(@Model[i].Id)" class="btn btn-small" id="b3"><i class=" icon-thumbs-up shaded">Like</i></a>
+                                              @if(Model[i].userName.Equals(u.UserName))
+                                                {
+                                                <a href="javascript:Delete('@Model[i].Id')" class="btn btn-small">
+													<i class="icon-retweet shaded"></i>
+													Delete
+												</a>
+                                                }
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="stream-respond">
+
+                                            @foreach (var k in Model[i].Comments)
+                                            {
+       
+                                                <div class="media stream">
+                                                    <a href="#" class="media-avatar small pull-left">
+                                                        <img src="@k.User.ImagePath">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <div class="stream-headline">
+                                                            <h5 class="stream-author">
+
+                                                                <b>@k.CommentFrom.</b><small>@k.CommentDate </small>
+                                                            </h5>
+                                                            <div class="stream-text">
+                                                                @k.Content
+                                                            </div>
+                                                        </div>
+                                                  
+                                                    </div>
+                                                </div>
+                                  
+                                            }
+
+                                        </div>
+
+                                        <div>
+
+                                            <div class="responsive-photo" style="margin-top: 10px;">
+
+                                                <form method="post" onsubmit="/Friend/Comment" action="/Friend/Comment">
+
+                                                    <input type="text" name="Comment" value="" placeholder="Write Comment Here" class="span6" style="height: 30px;" />
+
+                                                    @Html.Hidden("post", @Model[i].Id)
+
+
+                                                </form>
+                                            </div>
+
+
+                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                         
+                            }
+
+                        }
+
+                        @if (Model.Count > 5)
+                        {
+                            <div class="pagination pagination-centered">
+                                <ul>
+                                    <li><a href="/Client/NewsFeed"><i class="icon-double-angle-left"></i></a></li>
+                                    <li><a href="/Client/NewsFeed">1</a></li>
+                                    <li><a href="/Client/NewsFeed">2</a></li>
+                                    <li><a href="/Client/NewsFeed">3</a></li>
+                                    <li><a href="/Client/NewsFeed">4</a></li>
+                                    <li><a href="/Client/NewsFeed"><i class="icon-double-angle-right"></i></a></li>
+                                </ul>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,160 @@
+﻿@model Project_EAD.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/Content/Images/mlogo.png" />
+    <title>  Social Pedia </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/HomePage/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom Google Web Font -->
+    <link href="~/HomePage/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Add custom CSS here -->
+    <link href="~/HomePage/css/landing-page.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+    <div class="intro-header">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <div class="module-body" >
+                            <div class="control-group">
+                                <div class="controls row-fluid">
+                              
+                                    <script>
+
+                                        var userName = $('#Fname').val();
+
+                                        $.getJSON("/home/IsUserNameAvailable?Fname=" + userName, function (data) {
+                                            if (data) {
+                                                alert("User Name Already Exits.")
+                                                $('#Fname').val("");
+                                            }
+                                        });
+
+
+
+</script>
+				
+                                    <div class="module module-login span4 offset4"  >
+
+                     @using (Html.BeginForm("ValidateSignUp","Home",FormMethod.Post,new {@class="form-vertical "}))
+                      {
+					<!--form class="form-vertical" method="post" action="/Home/ValidateSignUp" -->
+						<div class="module-head">
+							<h3>Sign Up</h3>
+						</div>
+						<div class="module-body">
+							  @Html.ValidationSummary(true)
+                                
+                            <div class="control-group">
+								<div class="controls row-fluid">
+                                        @Html.TextBoxFor(x => x.Name, new { @class = "span12", type = "text", placeholder = "Name" ,  style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;"})
+                                    <br />
+                                        @Html.ValidationMessageFor(X=>X.Name)
+                                    <br />
+
+                                        @*Html.TextBox("Name", null, new { @class="span12", type="text",placeholder="Name",required=true})*@
+									<!--input class="span12" type="text" name="name" id="inputName" placeholder="Name"-->
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls row-fluid">
+									<!--input class="span12" type="text" id="inputEmail" name="userName" placeholder="Username"-->
+                                     @Html.TextBoxFor(x => x.UserName, new { @class = "span12", type = "text", placeholder = "User Name" ,  style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;"})
+                                                    <br />
+                                     @Html.ValidationMessageFor(m=>m.UserName)
+
+                                    <br />
+
+                                       @*Html.TextBox("userName", null, new { @class="span12", type="text",placeholder="User Name",required=true})*@
+								</div>
+							</div>
+
+							<div class="control-group">
+								<div class="controls row-fluid">
+
+                                     @Html.TextBoxFor(x => x.Password, new { @class = "span12", type = "password", placeholder = "Password" ,  style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;"})
+                                                    <br />
+                                     @Html.ValidationMessageFor(m=>m.Password)
+                                   
+                                    <br />
+
+                                       @*Html.TextBox("password", null, new { @class="span12", type="password",placeholder="Password ",required=true})*@
+									<!--input class="span12" type="password" name="password" id="inputPassword" placeholder="Password"-->
+								</div>
+							</div>
+
+                            <div class="control-group">
+								<div class="controls row-fluid">
+                                     @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "span12", type = "password", placeholder = "Confirm Password",  style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;" })
+                                         <br />
+                                     @Html.ValidationMessageFor(m=>m.ConfirmPassword)
+                                    <br />
+                                    
+								</div>
+							</div>
+
+
+
+						</div>
+						<div class="module-foot">
+							<div class="control-group">
+								<div class="controls clearfix">
+								
+                                        <input type="submit" style="width: 260px;height: 35px;background: #fff;	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400; " value="Sign Up" />
+									
+								</div>
+							</div>
+						</div>
+                     }
+                    </div> 
+                                                                                                   
+                                
+                                </div>
+                                
+                                                            
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+
+                        <li><a href="/Home/SignUp" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i><span class="network-name">Sign Up</span></a>
+                        </li>
+                        <li><a href="/Home/Index" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i><span class="network-name">Home</span></a>
+                        </li>
+                        <li><a href="/Home/SignIn" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i><span class="network-name">SignIn</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

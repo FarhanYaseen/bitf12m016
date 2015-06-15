@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Social Pedia";
+    
+   
+ }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="~/AdminSide/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="~/AdminSide/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="~/AdminSide/css/theme.css" rel="stylesheet">
+    <link type="text/css" href="~/AdminSide/images/icons/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+        rel='stylesheet'>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+     <link rel="shortcut icon" href="~/Content/Images/logo.png" />
+</head>
+<body>
+
+
+
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <i class="icon-reorder shaded"></i>
+                </a>
+
+                <a class="brand" href="/Admin/index" style="font-weight: bold; color: darkgreen; font-family: 'Old English Text MT'; font-size: xx-large;">Social Pedia </a>
+                   
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+
+                    <ul class="nav pull-right">
+
+                        <li><a href="/Home/SignIn">Sign In
+                        </a></li>
+
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+        </div>
+        <!-- /navbar-inner -->
+    </div>
+    <!-- /navbar -->
+    <div>
+        <div style="background-image:url('@Url.Content("~/Content/Images/main4.jpg")');"  class="wrapper">
+            <div class="container">
+                <div class="row">
+                    @RenderBody()
+                    @Scripts.Render("~/bundles/jquery")
+                    @RenderSection("scripts", required: false)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="container">
+
+
+            <p style="margin-left: 30%">
+                &copy; 2015-3000 <i style="font-family: 'Old English Text MT'; font-size: xx-large">Social Pedia</i> , Inc. All Rights Reserved.
+       
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

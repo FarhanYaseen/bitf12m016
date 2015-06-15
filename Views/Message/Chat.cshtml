@@ -1,0 +1,138 @@
+﻿@using Project_EAD.Models;
+@{
+    Layout = "~/Views/Shared/Others.cshtml";
+    User user = (User)Session["user"];
+    
+}
+@model List<Message>
+
+ <script src="~/Scripts/jquery-1.9.0.min.js"> </script>
+                
+<script src="~/Scripts/jquery-1.10.1.min.js"> </script>
+<script>
+    $(document).ready(function () {
+        $("d3").hide(100);
+       
+    });
+</script>
+     <script>
+        
+         function message(userName)
+         {
+             com = $('#chat').val();
+             $.getJSON("/Message/ChatMessage/userName=" + userName, function (data) {
+                 $('body').unload();
+                 $("body").load();
+             });
+         }
+    </script>
+<div class="span3">
+    @{
+        User friend =null;
+        
+            
+        }
+    @if(TempData["chatWith"]!=null)
+    {
+        friend = (User)TempData["chatWith"];
+    }
+    <div class="content">
+        <div class="module">
+            <div class="module-head">
+                <h3>Friends</h3>
+            </div>
+
+            <div class="module-body" >
+
+                <div class="row-fluid">
+                    <div class="media user">
+
+
+                        <a class="media-avatar pull-left" HREF="javascript:message(@friend.UserName)">
+
+
+                            <img src="@friend.ImagePath">
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-title">
+                                @friend.Name</h3>
+                            <p>
+                                <small class="muted">Pakistan</small>
+                            </p>
+
+
+                            <div class="media-option btn-group shaded-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+<div class="span5">
+    <div class="content" id="d3">
+        <div class="module">
+            <div class="module-head">
+                <h3>Chat</h3>
+            </div>
+
+
+            
+            <div class="module-body">
+
+
+                <div class="row-fluid" id="d2">
+                    @{
+                        string friendName="";
+                      }
+                    
+                    @foreach (var k in Model)
+                    {
+                        <div class="media stream">
+
+
+                            <a href="#" class="media-avatar small pull-left">
+                                <img src="@k.User.ImagePath">
+                            </a>
+                            <div class="media-body">
+                                <div class="stream-headline">
+                                    <h5 class="stream-author">
+
+                                        <b>@k.MessageFrom</b><small>@k.MessageDate</small>
+                                    </h5>
+
+                                    <div class="stream-text">
+                                        @k.MessageText
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        if (!k.User.UserName.Equals(user.UserName))
+                        {
+                            friendName = k.User.UserName;
+                        }
+
+                     
+                    }
+                      
+
+
+                                                                      
+                          
+                     <form method="post" onsubmit="/Message/Chat" action="/Message/ChatMessage">
+                     <input  id="chat" type="text" name="chat" value="" placeholder="Send Message"  class="span6" style="height: 30px;" />
+                         
+                                                
+                         @Html.Hidden("messageTo", @friend.UserName)
+                </form>
+                         </div>
+          
+                  </div>
+      
+              </div>
+    
+    </div>
+</div>

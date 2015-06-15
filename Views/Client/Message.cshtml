@@ -1,0 +1,64 @@
+﻿<html>
+    @using Project_EAD.Models
+    @using System.Collections
+    @model ArrayList    
+<head style="margin-top: 20%;">
+    <title>Index.....
+    </title>
+</head>
+<body style="margin-top: 200%;">
+    <h1>
+        @ViewBag.t 
+
+    </h1>
+    <table border="1">
+        <tr>
+            <th>
+               Name 
+            </th>
+             <th>
+               Email
+            </th>
+             <th>
+               Password 
+            </th>
+             <th>
+               Role 
+            </th>
+        </tr>
+
+        @foreach (var s in ViewBag.t)
+        { 
+            <tr>
+                <td>
+                    @s.Name;
+
+                </td>
+                <td>
+                    @s.Email;
+                </td>
+                <td>
+                    @s.Role;
+
+                </td>
+                <td>
+                    @s.Id;
+                </td>
+            </tr>
+        }@
+
+    </table>
+
+
+
+    @using (Html.BeginForm("UploadImg", "Client", FormMethod.Post, 
+                            new { enctype = "multipart/form-data" }))
+    {  
+        <label for="file">Upload Image:</label> 
+        <input type="file" name="file" id="file" style="width: 100%;" /> 
+        <input type="submit" value="Upload" class="submit" /> 
+    }
+
+    </body>
+
+</html>

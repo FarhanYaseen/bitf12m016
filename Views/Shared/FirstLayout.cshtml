@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "FirstLayout";
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+     <link rel="shortcut icon" href="~/Content/Images/logo.png" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link href="~/Content/landing-page.css" rel="stylesheet">
+    <script src="~/Scripts/bootstrap.js">
+
+    </script>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <script src="~/Scripts/jquery-1.9.1.min.js">
+    </script>
+
+</head>
+<body>
+
+    <div class="navbar navbar-inner navbar-fixed">
+        <a class="brand" style="font-weight: bold; color: darkgreen; font-family: 'Old English Text MT'; font-size: xx-large;" href="~/Views/Shared/FirstLayout">Social Pedia</a>
+
+    </div>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+
+    <div class="services-container">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="service wow fadeInUp">
+                        <div class="service-icon"><i class="fa fa-eye"></i></div>
+                        <h3>Social Pedia</h3>
+                        <p>
+                            A Site About Learning and Reading and Posting Post may be related to article news study etc so keep in touch with my Website and simply enjoy :) :) 
+
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="service wow fadeInDown">
+                        <div class="service-icon"><i class="fa fa-table"></i></div>
+                        <h3>About the Owner</h3>
+                        <p>Farhan Yaseen bitf12m016 :) :) is the owner of this website :) :) As your know About me :) :) So i don't want to make historic stories</p>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="service wow fadeInUp">
+                        <div class="service-icon"><i class="fa fa-magic"></i></div>
+                        <h3>About User</h3>
+                        <p>There is no hard and fast rule to use Social Pedia Just use as in friendly environment.So keep Post Eat And Sleep.And Keep Using Social Pedia </p>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="service wow fadeInDown">
+                        <div class="service-icon"><i class="fa fa-print"></i></div>
+                        <h3>About Post</h3>
+                        <p>You can Post News , Article and Study Article as well as other Reading Meterial.So keep Post , Eat And Sleep.And Keep Using Social Pedia </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="services-half-width-container">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span6 services-half-width-text wow fadeInLeft">
+                    <h3>EnterPrise Application And Developement</h3>
+                    <p>
+                        punjab university collge of information and technology is a platform which provide Students Of It with Loot of Skills related to Information Technolgy 
+	                    	As I am in currently in 6<sup>th</sup> Semester.<span class="violet">EAD</span> is the core Subject of the 6<sup>th</sup> Semester as well as the Degree.
+	                    	This Subject include many Frame-work , Technology as well as Other bulit-in support.
+                            We have Knowledege of N-tier Architect , <strong>MVC</strong> and Some Design Pattern As well by studying this subject
+	                    
+	                   
+                    </p>
+                </div>
+                <div class="span6 services-half-width-text wow fadeInUp">
+                    <h3>Others Technologies</h3>
+                    <p>
+                        In Our Project we use many others Technologies.These technology include some basic Of Java Language ,Full control of C#,
+                            Microsoft Server Database , Java Script , Html , Razor Syntax and lot more
+	                   
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call To Action -->
+    <div class="call-to-action-container">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12 call-to-action-text wow fadeInLeftBig">
+                    <p>
+                        Become Social Think Social Visit  <span class="violet">Social Pedia</span>.So,Eat , Sleep and Post :) :)
+	                    	
+	                   
+                    </p>
+                    <div class="call-to-action-button">
+                        <a class="big-link-3" href="#">Try It Now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  <div class="container" style="background-color:black;">
+        <div class="row-fluid mt centered">
+            <div class="span6 col-lg-offset-3">
+                <h1>
+                    <br />
+                    Social Pedia</h1>
+                <h3>You Will Enjoy The Site</h3>
+            </div>
+        </div>
+        <!-- /row -->
+
+        <div class="row-fluid mt centered">
+            <div class="span4">
+                <img class="img-circle" src="~/Content/Images/logo.gif" width="140" alt="">
+                <h4>Project</h4>
+                <p>Ead Project is a good Programming Practice to thgink about enterprise level Applications</p>
+                <p><i class="glyphicon glyphicon-send"></i><i class="glyphicon glyphicon-phone"></i><i class="glyphicon glyphicon-globe"></i></p>
+            </div>
+            <!--/col-lg-4 -->
+
+            <div class="span4">
+                <img class="img-circle" src="~/Content/Images/Technology.jpg" width="140" alt="">
+                <h4>Technology</h4>
+                <p>Mvc Frame-work,Asp.net,Razor syntax Html Jquery Bootstrap JavaScript and other technologies used to implement Enterprise level Application</p>
+                <p><i class="glyphicon glyphicon-send"></i><i class="glyphicon glyphicon-phone"></i><i class="glyphicon glyphicon-globe"></i></p>
+            </div>
+            <!--/col-lg-4 -->
+
+            <div class="span4">
+                <img class="img-circle" src="~/Content/Images/Future1.jpg" width="140" alt="">
+                <h4>Purpose</h4>
+                <p>To Fully Understand The EAD Concepts and want to get some Kind of Enterprise Level Expereince</p>
+                <p><i class="glyphicon glyphicon-send"></i><i class="glyphicon glyphicon-phone"></i><i class="glyphicon glyphicon-globe"></i></p>
+            </div>
+            <!--/col-lg-4 -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+    <!-- /container -->
+
+    <div class="container">
+        <hr>
+        <div class="row-fluid centered">
+            <div class="span6 offset-3">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Invite Me!</button>
+                </form>
+            </div>
+            <div class="span3"></div>
+        </div>
+        <!-- /row -->
+        <hr>
+       <div class="row-fluid">
+
+
+           <div class="span12">
+
+                 <p class="centered">Created by <i style="font-family: 'Buxton Sketch'">Farhan Yaseen BITF12016 :) :)<i /></p>
+           </div> 
+         
+       </div> 
+    </div>
+    <!-- /container -->
+    <div class="row-fluid" style="background-color:black;">
+        <div class="span12">
+
+
+    
+
+             
+
+
+                    
+                    <p>
+                        &copy; 2012-3000 <i  style="font-family: 'Old English Text MT'; font-size: xx-large">Social Pedia</i> , Inc. All Rights Reserved.
+       
+                    </p>
+                
+         
+        </div>
+    </div>
+</body>
+</html>

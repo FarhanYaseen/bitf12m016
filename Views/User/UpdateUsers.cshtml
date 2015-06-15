@@ -1,0 +1,73 @@
+﻿@using Project_EAD.Models;
+@{
+   
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+    User u = (User)Session["user"];
+    ViewBag.x = u.ImagePath; 
+}
+@model List<User>
+
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>Users Details</h3>
+                            </div>
+                            <div class="module-body table">
+                                <table class="datatable-1 table table-bordered table-striped	 display"
+                                    >
+                                    <thead>
+                                        <tr>
+                                            <th>Id
+                                            </th>
+                                            <th>Name
+                                            </th>
+                                            <th>UserName
+                                            </th>
+                                            <th>Password
+                                            </th>
+                                            <th>Role
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(var k in Model){
+                                             if(!k.UserName.Equals(u.UserName))
+                                            {
+                                        <tr class="odd gradeX">
+                                            <td>@k.Id
+                                            </td>
+                                            <td>@k.Name
+                                            </td>
+                                            <td>@k.UserName
+                                            </td>
+                                            <td class="center">@k.Password
+                                            </td>
+                                            <td class="center">@k.Role
+                                            </td>
+                                            <td>
+                                              
+                                                @Html.ActionLink("Update", "UpdateDetails","User",k, new { @class="btn btn-primary", userName = k.UserName })
+
+                                            </td>
+                                        </tr>
+                                        }
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                          <th>Id
+                                            </th>
+                                            <th>Name
+                                            </th>
+                                            <th>UserName
+                                            </th>
+                                            <th>Password
+                                            </th>
+                                            <th>Role
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
