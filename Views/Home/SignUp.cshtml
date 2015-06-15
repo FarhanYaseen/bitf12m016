@@ -40,11 +40,11 @@
                             <div class="control-group">
                                 <div class="controls row-fluid">
                               
-                                    <script>
+                                    <!--script>
 
-                                        var userName = $('#Fname').val();
+                                        var userName = $('#userName').val();
 
-                                        $.getJSON("/home/IsUserNameAvailable?Fname=" + userName, function (data) {
+                                        $.getJSON("/home/IsUserNameAvailable?userName=" + userName, function (data) {
                                             if (data) {
                                                 alert("User Name Already Exits.")
                                                 $('#Fname').val("");
@@ -53,7 +53,35 @@
 
 
 
-</script>
+</!--script-->
+                                     <script>
+
+                                         $(document).ready(function () {
+
+                                             $('#checking').hide();
+
+                                             $('#b1').click(function () {
+               
+                                                 var userName = $('#userName').val();
+
+                                                 //alert('User Name ='+ userName);
+                                                 $('#checking').show();
+                                                 $.getJSON("/home/IsUserNameAvailable?userName=" + userName, function (data)
+                                                 {
+                                                     $('#checking').hide();
+                                                     if (data) {
+                                                         $('#result').text("User already exists in database");
+                        
+                                                     }
+                                                     else {
+                                                         $('#result').text("User Name is available");
+                                                     }
+                                                 });
+
+                                             });
+
+                                         });
+                                         </script>
 				
                                     <div class="module module-login span4 offset4"  >
 
@@ -80,10 +108,10 @@
 							<div class="control-group">
 								<div class="controls row-fluid">
 									<!--input class="span12" type="text" id="inputEmail" name="userName" placeholder="Username"-->
-                                     @Html.TextBoxFor(x => x.UserName, new { @class = "span12", type = "text", placeholder = "User Name" ,  style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;"})
+                                     @Html.TextBoxFor(x => x.UserName, new { @class = "span12", type = "text", placeholder = "User Name" , id="userName", style="background: transparent; border: 1px solid rgba(255,255,255,0.6);width: 250px;height: 30px;"})
                                                     <br />
                                      @Html.ValidationMessageFor(m=>m.UserName)
-
+                                    <div id="checking"><p id="result"></p></div>
                                     <br />
 
                                        @*Html.TextBox("userName", null, new { @class="span12", type="text",placeholder="User Name",required=true})*@
@@ -121,7 +149,7 @@
 							<div class="control-group">
 								<div class="controls clearfix">
 								
-                                        <input type="submit" style="width: 260px;height: 35px;background: #fff;	color: #a18d6c;
+                                        <input type="submit" id="b1" style="width: 260px;height: 35px;background: #fff;	color: #a18d6c;
 	font-family: 'Exo', sans-serif;
 	font-size: 16px;
 	font-weight: 400; " value="Sign Up" />
