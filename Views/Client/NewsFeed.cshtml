@@ -14,9 +14,9 @@
             $("body").load("/Client/NewsFeed");
         });
     }
-    function pass_comment(val1) {
-        com = $('#Comment').val();
-
+    function pass_comment(val1,com) {
+      //  com = $('#c1').val();
+      
         $.getJSON("/Friend/Comment?post=" + val1 + "&Comment=" + com, function (data) {
             $('body').unload();
             $("body").load("/Client/NewsFeed");
@@ -215,13 +215,18 @@
                                     <div>
                                         <div class="responsive-photo" style="margin-top: 10px;">
 
-                                            <form method="post" onsubmit="/Friend/Comment" action="/Friend/Comment">
+
+
+
+                                               <form method="post" onsubmit="/Friend/Comment" action="/Friend/Comment">
 
                                                 <input type="text" name="Comment" value="" placeholder="Write Comment Here" class="span6" style="height: 30px;" />
 
                                                 @Html.Hidden("post", @Model[i].Id)
 
+
                                             </form>
+             
 
                                         </div>
 

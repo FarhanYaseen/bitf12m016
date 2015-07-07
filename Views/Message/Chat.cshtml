@@ -6,26 +6,7 @@
 }
 @model List<Message>
 
- <script src="~/Scripts/jquery-1.9.0.min.js"> </script>
-                
-<script src="~/Scripts/jquery-1.10.1.min.js"> </script>
-<script>
-    $(document).ready(function () {
-        $("d3").hide(100);
-       
-    });
-</script>
-     <script>
-        
-         function message(userName)
-         {
-             com = $('#chat').val();
-             $.getJSON("/Message/ChatMessage/userName=" + userName, function (data) {
-                 $('body').unload();
-                 $("body").load();
-             });
-         }
-    </script>
+
 <div class="span3">
     @{
         User friend =null;
@@ -71,6 +52,54 @@
         </div>
     </div>
 </div>
+
+<script>
+   
+  
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 5000;
+
+    function loadPage()
+      {
+            $('body').unload();
+            $("body").load("/Message/chat/?userName=" + '@friend.UserName');
+      }
+
+
+//    $('#chat').keyup(
+
+    function Up() {
+      //  alert('Up: 11');
+
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(function () { loadPage() }, doneTypingInterval);
+
+    }
+    //);
+
+    //on keydown, clear the countdown 
+  //  $('#chat').keydown(
+        
+    function Down() {
+     //   alert('Down: 12');
+       clearTimeout(typingTimer);
+    }
+
+
+    function Message() {
+//        alert("hi");
+
+        msg = $('#chat').val();
+
+        $.getJSON("/Message/ChatMessage/?chat=" + msg + "&MessageTo=" + '@friend.UserName', function (data) {
+
+          typingTimer=  setInterval(function () { loadPage() }, 15000);
+            $('body').unload();
+            $("body").load("/Message/chat/?userName=" + '@friend.UserName');
+        });
+    }
+   
+ </script>
 <div class="span5">
     <div class="content" id="d3">
         <div class="module">
@@ -88,31 +117,39 @@
                         string friendName="";
                       }
                     
-                    @foreach (var k in Model)
-                    {
+                
+                  
+
+                                    <div class="stream-text">
+                                           <input style="width:80%;height:auto;margin-left:10%;" onChange="Message()" id="chat" type="text" name="chat" value="" placeholder="Send Message"  class="span6" style="height: 30px;" />
+                                    </div>
+                          
+                    
+                     @for(int i=Model.Count-1;i>=0;i--)
+                   {
                         <div class="media stream">
 
 
                             <a href="#" class="media-avatar small pull-left">
-                                <img src="@k.User.ImagePath">
+                                <img src="@Model[i].User.ImagePath">
                             </a>
                             <div class="media-body">
                                 <div class="stream-headline">
                                     <h5 class="stream-author">
 
-                                        <b>@k.MessageFrom</b><small>@k.MessageDate</small>
+                                        <b>@Model[i].MessageFrom</b><small>@Model[i].MessageDate</small>
                                     </h5>
 
                                     <div class="stream-text">
-                                        @k.MessageText
+                                        @Model[i].MessageText
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        if (!k.User.UserName.Equals(user.UserName))
+                       if (!Model[i].User.UserName.Equals(user.UserName))
                         {
-                            friendName = k.User.UserName;
+                            friendName = Model[i].User.UserName;
                         }
 
                      
@@ -122,12 +159,12 @@
 
                                                                       
                           
-                     <form method="post" onsubmit="/Message/Chat" action="/Message/ChatMessage">
-                     <input  id="chat" type="text" name="chat" value="" placeholder="Send Message"  class="span6" style="height: 30px;" />
+                     <!--form method="post" onsubmit="/Message/Chat" action="/Message/ChatMessage"-->
+                     
                          
                                                 
-                         @Html.Hidden("messageTo", @friend.UserName)
-                </form>
+                         @*Html.Hidden("messageTo", @friend.UserName)*@
+                <!--/!--form-->
                          </div>
           
                   </div>

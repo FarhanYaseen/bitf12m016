@@ -19,8 +19,40 @@
 @using  System.Collections.Generic;
 
 @model List<Message>
+  <script>
+  $(function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#b1" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
     <div class="content">
                          
+
            <div class="module message">
                                 <div class="module-head">
                                     <h3>
@@ -58,7 +90,7 @@
 											
 										               
                                            <h5 class="stream-author">Message To </h5> 
-                                            @Html.TextBox("MessageTo", null, new { style="width:70%;height:4%;"})
+                                            @Html.TextBox("MessageTo", null, new {id="b1" ,style="width:70%;height:4%;"})
 
                                             <button type="submit" class="btn btn-small icon-share-alt" style="height:4%; "> Send </button>
                                             </div>
